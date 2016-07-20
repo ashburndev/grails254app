@@ -1,12 +1,20 @@
-Our team has a Grailss 2.1.1 web application that we want to be able to both build and deploy using Java 8.
+# Grails 2.1.1 Framework to Grails 2.5.4 Framework Migration
+
+## Background
+
+Our team has a Grails 2.1.1 web application that we want to be able to both build and deploy using Java 8.
 So we are migrating that web application to the Grails 2.5.4 framework (as of this writing, Grails 2.5.4 is
 the newest Grails 2.x release).
 
 Our approach is to create an empty (new) Grails 2.5.4 web application project, and then move individual files
 from the existing Grails 2.1.1 project directory to the Grails 2.5.4 project directory.
 
+## Creating a New Grails 2.5.4 Project
+
 Our first step, create a new Grails 2.5.4 web application project, was accomplished on a workstation running Linux
-and using the commands below.
+and using the commands below.  As one of our objectives of the migration is to use Java 8 for both our development
+and deployment environments, I did this work using a Java 8 JDK release (from Oracle), although I could have used
+Java 7 for the following.
 
     grails create-app grails254app
     cd grails254app/
@@ -33,8 +41,12 @@ and using the commands below.
     Java HotSpot(TM) 64-Bit Server VM (build 25.66-b17, mixed mode)
     ashburndave@dphnuc:~/g2projects/grails254app$ 
 
-I created and prepared an AWS EC2 instance to which I later deployed the above war file (using Tomcat Manager)
+## Preparing an AWS EC2 Instance for Deployment of a Grails 2.5.4 web application
 
+I created and prepared an AWS EC2 instance to which I later deployed the above war file (using Tomcat Manager).
+As one of our objectives of the migration is to use Java 8 for both our development and deployment environments,
+I did this work using a Java 8 JDK release.  For now, I am content to use an OpenJDK release of Java 8, but at
+some point I intend to replace the OpenJDK Java 8 with the Oracle Java 8 JDK.
 
        __|  __|_  )
        _|  (     /   Amazon Linux AMI
@@ -89,7 +101,10 @@ I created and prepared an AWS EC2 instance to which I later deployed the above w
     [ec2-user@ip-172-31-38-83 ~]$ jar
     Usage: jar {ctxui}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...
 
-The grails254app.war has been deployed to the above AWS EC2 instance, and is available using this URL
+The grails254app.war has been deployed to the above AWS EC2 instance, and is available using the URL below.
+At this stage this Grails 2.5.4 web application is about the simplist possible Grails 2.5.4 web application.
+But it does demonstrate a basic compatiblity of the Grails 2.5.4 Framework with a Java 8 development and
+deployment environment.
 
 http://ec2-52-87-193-41.compute-1.amazonaws.com:8080/grails254/
 
