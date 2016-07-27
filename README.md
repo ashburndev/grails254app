@@ -108,7 +108,34 @@ deployment environment.
 
 http://ec2-52-87-193-41.compute-1.amazonaws.com:8080/grails254/
 
+## Adding a Domain class, a Controller and Views
 
+The work described above was a first test to see if a Grails 2.5.4 web application could be developed and deployed using Java 8.  While it worked (and that was a significant result), a more robust Grails application is certainly needed to ascertain real compatibility with Java 8.  So I modified the grails254app project, adding a domain class and a corresponding controller and views.
+
+    grails set-version 0.2
+    grails create-domain-class com.nile.Book
+    vi grails-app/domain/com/nile/Book.groovy
+    grails generate-all com.nile.Book
+    grails war target/grails254app.war
+
+The first version of the simple domain class looks like this.
+
+    package com.nile
+    
+    class Book {
+        String title
+        String author
+        String comment
+        static constraints = {
+          title maxSize: 50, blank: false
+          author maxSize: 35, nullable: true
+          comment maxSize: 1000, nullable: true
+        }
+    }
+
+I again used the Tomcat manager to deploy the war file to my AWS EC2 instance, and the new version of the web application is now running and available at the same URL as before.
+
+http://ec2-52-87-193-41.compute-1.amazonaws.com:8080/grails254/
 
 
 
